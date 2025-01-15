@@ -123,7 +123,7 @@
                     <label for="image_url">Book Image URL: </label>
                     <input type="url" id="image_url" name="image_url" required><br><br>
 
-                    <input type="submit" value="Add Book">
+                    <input type="submit" value="Update Book">
                 </form>
                         
             </div>
