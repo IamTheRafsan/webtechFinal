@@ -31,13 +31,11 @@ function matchToken($token) {
 }
 
 function matchUsedToken($token){
-
     $conn = new mysqli("localhost", "root", "", "webtech");
 
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
-
     $stmt = $conn->prepare("SELECT COUNT(*) FROM used_token WHERE used_token_number = ?");
     $stmt->bind_param("s", $token);
     $stmt->execute();
@@ -45,42 +43,26 @@ function matchUsedToken($token){
     $stmt->fetch();
     $stmt->close();
 
-    $conn->close();
-
     if ($count > 0) {
+        $conn->close();
         echo "Error: Token already used.";
-        return true;
+        exit;
     } else {
-        echo "Token not used.";
+        $insertStmt = $conn->prepare("INSERT INTO used_token (used_token_number) VALUES (?)");
+        $insertStmt->bind_param("s", $token);
+
+        if ($insertStmt->execute()) {
+            echo "Token successfully recorded.";
+        } else {
+            echo "Error: Unable to record token.";
+        }
+        
+        $insertStmt->close();
+        $conn->close();
         return false;
     }
-
 }
 
 
 
 
-// Write the used token to the file
-function writeToUsed($token) {
-    $conn = new mysqli("localhost", "root", "", "webtech");
-
-    if ($conn->connect_error) {
-        die("Connection failed: " . $conn->connect_error);
-    }
-
-    $stmt = $conn->prepare("INSERT INTO used_token (used_token_number) VALUES (?)");
-    $stmt->bind_param("s", $token);
-
-    if ($stmt->execute()) {
-        echo "Token successfully added to the database.";
-    } else {
-        echo "Error: Unable to add token.";
-    }
-
-    $stmt->close();
-    $conn->close();
-}
-
-
-
-?>

@@ -86,7 +86,6 @@ if (!empty($_POST['fullName']) &&
 
                     try{
                         matchToken($token);
-                        matchUsedToken($token);
 
                         if(isset($_COOKIE[$cookie_name])){
 
@@ -97,13 +96,12 @@ if (!empty($_POST['fullName']) &&
                         else{
         
                             $Token = $_POST['token'];
+
+                            matchUsedToken($token);
                             
                             //Set Cookies
         
                             setcookie($cookie_name, $cookie_value, time() + (86400*10), "/");
-                            
-                            //write as used token
-                            writeToUsed($token);
         
                             
                             //Print if everything is ok.

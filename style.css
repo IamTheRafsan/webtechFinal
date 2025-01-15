@@ -172,48 +172,17 @@ input[type="submit"]{
 .benefits {
     display: flex;
     overflow-x: auto;
-    padding: 10px;
-    white-space: nowrap;
-    gap: 15px;
-    scroll-behavior: smooth;
+    padding: 20px;
+    gap: 20px;
 }
-
-.book {
-    display: inline-block;
-    flex-shrink: 0;
-    width: 150px;
+.benefits .book {
+    flex: 0 0 auto;
     text-align: center;
-    background-color: #f9f9f9;
-    padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 200px;
 }
-
-.book img {
-    width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.book p {
-    margin: 5px 0;
-}
-
-.scroll-buttons {
-    display: flex;
-    justify-content: space-between;
-    margin: 10px 0;
-}
-
-.scroll-buttons button {
-    padding: 10px 20px;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.scroll-buttons button:hover {
-    background-color: #0056b3;
+.benefits img {
+    height: 200px;
+    width: 200px;
+    object-fit: cover;
+    border-radius: 10px;
 }
