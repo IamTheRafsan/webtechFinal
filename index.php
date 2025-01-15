@@ -91,11 +91,58 @@
         </div>
         <div class="content">
             <div class="hero">
-                Hero Section
+                <h2>Update Books</h2>
+            
+                <form action="updateBooks.php" class='bookForm' method="POST">
+                <select id="books" name="books" class="customSelector">
+                        <?php
+                                $conn = new mysqli("localhost", "root", "", "webtech");
+
+                                if ($conn->connect_error) {
+                                    die("Connection failed: " . $conn->connect_error);
+                                }
+
+                                $sql = "SELECT book_name FROM books";
+                                $result = $conn->query($sql);
+
+                                if ($result->num_rows > 0) {
+                                    while ($row = $result->fetch_assoc()) {
+                                        echo "<option value='{$row['book_name']}'>{$row['book_name']}</option>";
+                                    }
+                                } else {
+                                    echo "<option value=''>No books available</option>";
+                                }
+
+                                $conn->close();
+                            ?>
+                </select><br>
+
+                    <label for="author">Author: </label>
+                    <input type="text" id="author" name="author" required><br><br>
+
+                    <label for="image_url">Book Image URL: </label>
+                    <input type="url" id="image_url" name="image_url" required><br><br>
+
+                    <input type="submit" value="Add Book">
+                </form>
+                        
             </div>
             <div class="about">
-                About Section
+            <h2>ADD Books</h2>
+                <form action="addBooks.php" class='bookForm' method="POST">
+                    <label for="book_name">Book Name: </label>
+                    <input type="text" id="book_name" name="book_name" required><br><br>
+
+                    <label for="author">Author: </label>
+                    <input type="text" id="author" name="author" required><br><br>
+
+                    <label for="image_url">Book Image URL: </label>
+                    <input type="url" id="image_url" name="image_url" required><br><br>
+
+                    <input type="submit" value="Add Book">
+                </form>
             </div>
+
             <div class="benefits">
             <?php
             $conn = new mysqli("localhost", "root", "", "webtech");
